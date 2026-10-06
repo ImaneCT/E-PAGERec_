@@ -7,9 +7,6 @@ Graph-Based Representation Learning".
 
 Python 3, PyTorch, NumPy and SciPy:
 
-```
-pip install -r requirements.txt
-```
 
 ## Data
 
