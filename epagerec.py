@@ -29,7 +29,6 @@ def log(msg, fh=None):
 
 # data
 def read_lgcn(path):
-    """Reads 'u i1 i2 ...' lines."""
     d = {}
     with open(path) as f:
         for line in f:
@@ -100,7 +99,6 @@ class Data:
                 f"density={self.n_train / (self.n_users * self.n_items):.5f}")
 
     def sample_negatives(self, users, n_retry=5):
-        """Uniform negatives, resampled when they hit a training positive."""
         neg = np.random.randint(0, self.n_items, size=len(users))
         for _ in range(n_retry):
             keys = users * self.n_items + neg
@@ -174,7 +172,6 @@ def spherical_kmeans(X, K, iters, init=None, gen=None):
 
 
 def segment_mean(x, a, K):
-    """Mean of rows of x per community (differentiable w.r.t. x)."""
     s = torch.zeros(K, x.size(1), device=x.device, dtype=x.dtype).index_add(0, a, x)
     cnt = torch.bincount(a, minlength=K).clamp(min=1).to(x.dtype).unsqueeze(1)
     return s / cnt
